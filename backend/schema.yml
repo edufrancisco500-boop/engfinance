@@ -1,0 +1,4884 @@
+openapi: 3.0.3
+info:
+  title: EngFinance API
+  version: 0.2.0
+paths:
+  /api/ai-summary/:
+    get:
+      operationId: ai_summary_retrieve
+      description: Resumo local por regras, sem consulta externa e sem capacidade
+        de alteração de dados.
+      tags:
+      - ai-summary
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/audit/:
+    get:
+      operationId: audit_retrieve
+      tags:
+      - audit
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/dashboard/:
+    get:
+      operationId: dashboard_retrieve
+      description: Indicadores financeiros calculados no backend, limitados ao escopo
+        e aos filtros.
+      tags:
+      - dashboard
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/import/:
+    post:
+      operationId: import_create
+      tags:
+      - import
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                resource:
+                  type: string
+                file:
+                  type: string
+                  format: binary
+                commit:
+                  type: boolean
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/metadata/:
+    get:
+      operationId: metadata_retrieve
+      tags:
+      - metadata
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/policy/:
+    patch:
+      operationId: policy_partial_update
+      description: Ajusta low_balance_percent, poor_rating e expiry_days. Justificativa
+        reason obrigatória.
+      tags:
+      - policy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: {}
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: {}
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/reports/:
+    get:
+      operationId: reports_retrieve
+      description: Exporta o recorte autorizado em XLSX ou CSV. Parâmetros section
+        e format_file.
+      tags:
+      - reports
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: string
+                format: binary
+          description: ''
+  /api/schema/:
+    get:
+      operationId: schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - schema
+      security:
+      - cookieAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/v1/action-plans/:
+    get:
+      operationId: v1_action_plans_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPlanList'
+          description: ''
+    post:
+      operationId: v1_action_plans_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plan'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Plan'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Plan'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+          description: ''
+  /api/v1/action-plans/{id}/:
+    get:
+      operationId: v1_action_plans_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este action plan.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+          description: ''
+    patch:
+      operationId: v1_action_plans_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este action plan.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPlan'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPlan'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPlan'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plan'
+          description: ''
+  /api/v1/allocations/:
+    get:
+      operationId: v1_allocations_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAllocationList'
+          description: ''
+    post:
+      operationId: v1_allocations_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Allocation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Allocation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Allocation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allocation'
+          description: ''
+  /api/v1/allocations/{id}/:
+    get:
+      operationId: v1_allocations_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este allocation.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allocation'
+          description: ''
+  /api/v1/allocations/{id}/approve/:
+    post:
+      operationId: v1_allocations_approve_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este allocation.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Allocation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Allocation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Allocation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allocation'
+          description: ''
+  /api/v1/allocations/{id}/reject/:
+    post:
+      operationId: v1_allocations_reject_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este allocation.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Allocation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Allocation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Allocation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allocation'
+          description: ''
+  /api/v1/allocations/{id}/submit/:
+    post:
+      operationId: v1_allocations_submit_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este allocation.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Allocation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Allocation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Allocation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Allocation'
+          description: ''
+  /api/v1/amendments/:
+    get:
+      operationId: v1_amendments_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAmendmentList'
+          description: ''
+    post:
+      operationId: v1_amendments_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Amendment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Amendment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Amendment'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Amendment'
+          description: ''
+  /api/v1/amendments/{id}/:
+    get:
+      operationId: v1_amendments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este amendment.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Amendment'
+          description: ''
+  /api/v1/amendments/{id}/approve/:
+    post:
+      operationId: v1_amendments_approve_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este amendment.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Amendment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Amendment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Amendment'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Amendment'
+          description: ''
+  /api/v1/amendments/{id}/reject/:
+    post:
+      operationId: v1_amendments_reject_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este amendment.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Amendment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Amendment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Amendment'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Amendment'
+          description: ''
+  /api/v1/amendments/{id}/submit/:
+    post:
+      operationId: v1_amendments_submit_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este amendment.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Amendment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Amendment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Amendment'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Amendment'
+          description: ''
+  /api/v1/attachments/:
+    get:
+      operationId: v1_attachments_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAttachmentList'
+          description: ''
+    post:
+      operationId: v1_attachments_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Attachment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Attachment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Attachment'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+          description: ''
+  /api/v1/attachments/{id}/:
+    get:
+      operationId: v1_attachments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este attachment.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+          description: ''
+  /api/v1/attachments/{id}/download/:
+    get:
+      operationId: v1_attachments_download_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este attachment.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachment'
+          description: ''
+  /api/v1/budget-revisions/:
+    get:
+      operationId: v1_budget_revisions_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBudgetRevisionList'
+          description: ''
+    post:
+      operationId: v1_budget_revisions_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetRevision'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BudgetRevision'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BudgetRevision'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetRevision'
+          description: ''
+  /api/v1/budget-revisions/{id}/:
+    get:
+      operationId: v1_budget_revisions_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este budget revision.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetRevision'
+          description: ''
+  /api/v1/budget-revisions/{id}/approve/:
+    post:
+      operationId: v1_budget_revisions_approve_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este budget revision.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetRevision'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BudgetRevision'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BudgetRevision'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetRevision'
+          description: ''
+  /api/v1/budget-revisions/{id}/reject/:
+    post:
+      operationId: v1_budget_revisions_reject_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este budget revision.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetRevision'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BudgetRevision'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BudgetRevision'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetRevision'
+          description: ''
+  /api/v1/budget-revisions/{id}/submit/:
+    post:
+      operationId: v1_budget_revisions_submit_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este budget revision.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetRevision'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BudgetRevision'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BudgetRevision'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BudgetRevision'
+          description: ''
+  /api/v1/budgets/:
+    get:
+      operationId: v1_budgets_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBudgetList'
+          description: ''
+    post:
+      operationId: v1_budgets_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Budget'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Budget'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Budget'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Budget'
+          description: ''
+  /api/v1/budgets/{id}/:
+    get:
+      operationId: v1_budgets_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este budget.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Budget'
+          description: ''
+  /api/v1/budgets/{id}/approve/:
+    post:
+      operationId: v1_budgets_approve_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este budget.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Budget'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Budget'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Budget'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Budget'
+          description: ''
+  /api/v1/budgets/{id}/reject/:
+    post:
+      operationId: v1_budgets_reject_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este budget.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Budget'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Budget'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Budget'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Budget'
+          description: ''
+  /api/v1/budgets/{id}/submit/:
+    post:
+      operationId: v1_budgets_submit_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este budget.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Budget'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Budget'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Budget'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Budget'
+          description: ''
+  /api/v1/contract-usage/:
+    get:
+      operationId: v1_contract_usage_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedContractUsageList'
+          description: ''
+    post:
+      operationId: v1_contract_usage_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractUsage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ContractUsage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ContractUsage'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractUsage'
+          description: ''
+  /api/v1/contract-usage/{id}/:
+    get:
+      operationId: v1_contract_usage_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este contract usage.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractUsage'
+          description: ''
+    patch:
+      operationId: v1_contract_usage_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este contract usage.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedContractUsage'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedContractUsage'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedContractUsage'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContractUsage'
+          description: ''
+  /api/v1/contracts/:
+    get:
+      operationId: v1_contracts_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedContractList'
+          description: ''
+    post:
+      operationId: v1_contracts_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Contract'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+          description: ''
+  /api/v1/contracts/{id}/:
+    get:
+      operationId: v1_contracts_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este contract.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+          description: ''
+    put:
+      operationId: v1_contracts_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este contract.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Contract'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Contract'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+          description: ''
+    patch:
+      operationId: v1_contracts_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este contract.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedContract'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedContract'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedContract'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contract'
+          description: ''
+  /api/v1/coordinations/:
+    get:
+      operationId: v1_coordinations_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCoordinationList'
+          description: ''
+    post:
+      operationId: v1_coordinations_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Coordination'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Coordination'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Coordination'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Coordination'
+          description: ''
+  /api/v1/coordinations/{id}/:
+    get:
+      operationId: v1_coordinations_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este coordination.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Coordination'
+          description: ''
+    put:
+      operationId: v1_coordinations_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este coordination.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Coordination'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Coordination'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Coordination'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Coordination'
+          description: ''
+    patch:
+      operationId: v1_coordinations_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este coordination.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCoordination'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCoordination'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCoordination'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Coordination'
+          description: ''
+  /api/v1/cost-centers/:
+    get:
+      operationId: v1_cost_centers_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCostCenterList'
+          description: ''
+    post:
+      operationId: v1_cost_centers_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostCenter'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CostCenter'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CostCenter'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCenter'
+          description: ''
+  /api/v1/cost-centers/{id}/:
+    get:
+      operationId: v1_cost_centers_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este cost center.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCenter'
+          description: ''
+    put:
+      operationId: v1_cost_centers_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este cost center.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CostCenter'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CostCenter'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CostCenter'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCenter'
+          description: ''
+    patch:
+      operationId: v1_cost_centers_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este cost center.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCostCenter'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCostCenter'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCostCenter'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostCenter'
+          description: ''
+  /api/v1/cycles/:
+    get:
+      operationId: v1_cycles_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCycleList'
+          description: ''
+    post:
+      operationId: v1_cycles_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cycle'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Cycle'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Cycle'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cycle'
+          description: ''
+  /api/v1/cycles/{id}/:
+    get:
+      operationId: v1_cycles_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este cycle.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cycle'
+          description: ''
+  /api/v1/departments/:
+    get:
+      operationId: v1_departments_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDepartmentList'
+          description: ''
+    post:
+      operationId: v1_departments_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Department'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Department'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Department'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+          description: ''
+  /api/v1/departments/{id}/:
+    get:
+      operationId: v1_departments_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este department.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+          description: ''
+    put:
+      operationId: v1_departments_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este department.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Department'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Department'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Department'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+          description: ''
+    patch:
+      operationId: v1_departments_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este department.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedDepartment'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Department'
+          description: ''
+  /api/v1/documents/:
+    get:
+      operationId: v1_documents_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDocumentList'
+          description: ''
+    post:
+      operationId: v1_documents_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/v1/documents/{id}/:
+    get:
+      operationId: v1_documents_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este document.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/v1/documents/{id}/approve/:
+    post:
+      operationId: v1_documents_approve_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este document.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/v1/documents/{id}/reject/:
+    post:
+      operationId: v1_documents_reject_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este document.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/v1/documents/{id}/reverse/:
+    post:
+      operationId: v1_documents_reverse_create
+      description: Reverse the action for the given `url_name`.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este document.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/v1/documents/{id}/submit/:
+    post:
+      operationId: v1_documents_submit_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este document.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Document'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Document'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: ''
+  /api/v1/evaluations/:
+    get:
+      operationId: v1_evaluations_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEvaluationList'
+          description: ''
+    post:
+      operationId: v1_evaluations_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Evaluation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Evaluation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Evaluation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Evaluation'
+          description: ''
+  /api/v1/evaluations/{id}/:
+    get:
+      operationId: v1_evaluations_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este evaluation.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Evaluation'
+          description: ''
+  /api/v1/fundings/:
+    get:
+      operationId: v1_fundings_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedFundingList'
+          description: ''
+    post:
+      operationId: v1_fundings_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Funding'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Funding'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Funding'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Funding'
+          description: ''
+  /api/v1/fundings/{id}/:
+    get:
+      operationId: v1_fundings_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este funding.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Funding'
+          description: ''
+  /api/v1/fundings/{id}/approve/:
+    post:
+      operationId: v1_fundings_approve_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este funding.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Funding'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Funding'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Funding'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Funding'
+          description: ''
+  /api/v1/fundings/{id}/reject/:
+    post:
+      operationId: v1_fundings_reject_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este funding.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Funding'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Funding'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Funding'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Funding'
+          description: ''
+  /api/v1/fundings/{id}/submit/:
+    post:
+      operationId: v1_fundings_submit_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este funding.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Funding'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Funding'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Funding'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Funding'
+          description: ''
+  /api/v1/invitations/:
+    get:
+      operationId: v1_invitations_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedInvitationList'
+          description: ''
+    post:
+      operationId: v1_invitations_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Invitation'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Invitation'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Invitation'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invitation'
+          description: ''
+  /api/v1/invitations/{id}/:
+    get:
+      operationId: v1_invitations_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este invitation.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invitation'
+          description: ''
+  /api/v1/periods/:
+    get:
+      operationId: v1_periods_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPeriodChangeList'
+          description: ''
+    post:
+      operationId: v1_periods_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PeriodChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PeriodChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PeriodChange'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeriodChange'
+          description: ''
+  /api/v1/periods/{id}/:
+    get:
+      operationId: v1_periods_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este period change.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeriodChange'
+          description: ''
+  /api/v1/periods/{id}/approve/:
+    post:
+      operationId: v1_periods_approve_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este period change.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PeriodChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PeriodChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PeriodChange'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeriodChange'
+          description: ''
+  /api/v1/periods/{id}/reject/:
+    post:
+      operationId: v1_periods_reject_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este period change.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PeriodChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PeriodChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PeriodChange'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeriodChange'
+          description: ''
+  /api/v1/periods/{id}/submit/:
+    post:
+      operationId: v1_periods_submit_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este period change.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PeriodChange'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PeriodChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PeriodChange'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PeriodChange'
+          description: ''
+  /api/v1/portfolios/:
+    get:
+      operationId: v1_portfolios_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPortfolioList'
+          description: ''
+    post:
+      operationId: v1_portfolios_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Portfolio'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Portfolio'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Portfolio'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio'
+          description: ''
+  /api/v1/portfolios/{id}/:
+    get:
+      operationId: v1_portfolios_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este portfolio.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio'
+          description: ''
+    put:
+      operationId: v1_portfolios_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este portfolio.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Portfolio'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Portfolio'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Portfolio'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio'
+          description: ''
+    patch:
+      operationId: v1_portfolios_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este portfolio.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPortfolio'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPortfolio'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPortfolio'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Portfolio'
+          description: ''
+  /api/v1/projects/:
+    get:
+      operationId: v1_projects_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedProjectList'
+          description: ''
+    post:
+      operationId: v1_projects_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Project'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Project'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+  /api/v1/projects/{id}/:
+    get:
+      operationId: v1_projects_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este project.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+    put:
+      operationId: v1_projects_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este project.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Project'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Project'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+    patch:
+      operationId: v1_projects_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este project.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedProject'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedProject'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedProject'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: ''
+  /api/v1/suppliers/:
+    get:
+      operationId: v1_suppliers_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedSupplierList'
+          description: ''
+    post:
+      operationId: v1_suppliers_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+          description: ''
+  /api/v1/suppliers/{id}/:
+    get:
+      operationId: v1_suppliers_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este supplier.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+          description: ''
+    put:
+      operationId: v1_suppliers_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este supplier.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Supplier'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+          description: ''
+    patch:
+      operationId: v1_suppliers_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este supplier.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedSupplier'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedSupplier'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedSupplier'
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Supplier'
+          description: ''
+  /api/v1/transfers/:
+    get:
+      operationId: v1_transfers_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: Um número de página dentro do conjunto de resultados paginado.
+        schema:
+          type: integer
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTransferList'
+          description: ''
+    post:
+      operationId: v1_transfers_create
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+          description: ''
+  /api/v1/transfers/{id}/:
+    get:
+      operationId: v1_transfers_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este transfer.
+        required: true
+      tags:
+      - v1
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+          description: ''
+  /api/v1/transfers/{id}/approve/:
+    post:
+      operationId: v1_transfers_approve_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este transfer.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+          description: ''
+  /api/v1/transfers/{id}/reject/:
+    post:
+      operationId: v1_transfers_reject_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este transfer.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+          description: ''
+  /api/v1/transfers/{id}/submit/:
+    post:
+      operationId: v1_transfers_submit_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: Um valor inteiro único que identifica este transfer.
+        required: true
+      tags:
+      - v1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Transfer'
+        required: true
+      security:
+      - cookieAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transfer'
+          description: ''
+components:
+  schemas:
+    ActionPlanStateEnum:
+      enum:
+      - OPEN
+      - PROGRESS
+      - DONE
+      type: string
+      description: |-
+        * `OPEN` - Aberto
+        * `PROGRESS` - Em andamento
+        * `DONE` - Concluído
+    Allocation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        balance:
+          type: string
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FinanceStateEnum'
+          readOnly: true
+        reason:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        approved_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        created_by:
+          type: integer
+          readOnly: true
+        approved_by:
+          type: integer
+          readOnly: true
+          nullable: true
+        budget:
+          type: integer
+        project:
+          type: integer
+          nullable: true
+        cost_center:
+          type: integer
+          nullable: true
+      required:
+      - amount
+      - approved_at
+      - approved_by
+      - balance
+      - budget
+      - created_at
+      - created_by
+      - id
+      - reason
+      - status
+    Amendment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FinanceStateEnum'
+          readOnly: true
+        reason:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        approved_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        end_date:
+          type: string
+          format: date
+          nullable: true
+        created_by:
+          type: integer
+          readOnly: true
+        approved_by:
+          type: integer
+          readOnly: true
+          nullable: true
+        contract:
+          type: integer
+      required:
+      - amount
+      - approved_at
+      - approved_by
+      - contract
+      - created_at
+      - created_by
+      - id
+      - reason
+      - status
+    AnswerInput:
+      type: object
+      properties:
+        criterion:
+          type: integer
+          minimum: 1
+        score:
+          type: integer
+          maximum: 5
+          minimum: 1
+          nullable: true
+      required:
+      - criterion
+      - score
+    Attachment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        contract:
+          type: integer
+        name:
+          type: string
+          maxLength: 180
+        file:
+          type: string
+          format: uri
+          writeOnly: true
+        uploaded_by:
+          type: integer
+          readOnly: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - contract
+      - created_at
+      - file
+      - id
+      - name
+      - uploaded_by
+    Budget:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        balance:
+          type: string
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FinanceStateEnum'
+          readOnly: true
+        reason:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        approved_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        year:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        category:
+          $ref: '#/components/schemas/FinancialCategoryEnum'
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        created_by:
+          type: integer
+          readOnly: true
+        approved_by:
+          type: integer
+          readOnly: true
+          nullable: true
+        portfolio:
+          type: integer
+      required:
+      - amount
+      - approved_at
+      - approved_by
+      - balance
+      - category
+      - created_at
+      - created_by
+      - id
+      - portfolio
+      - reason
+      - status
+      - year
+    BudgetRevision:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FinanceStateEnum'
+          readOnly: true
+        reason:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        approved_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        created_by:
+          type: integer
+          readOnly: true
+        approved_by:
+          type: integer
+          readOnly: true
+          nullable: true
+        budget:
+          type: integer
+      required:
+      - amount
+      - approved_at
+      - approved_by
+      - budget
+      - created_at
+      - created_by
+      - id
+      - reason
+      - status
+    Contract:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        current_value:
+          type: string
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        manager:
+          type: string
+          maxLength: 150
+        inspector:
+          type: string
+          maxLength: 150
+        status:
+          $ref: '#/components/schemas/ContractStatusEnum'
+        start_date:
+          type: string
+          format: date
+          nullable: true
+        end_date:
+          type: string
+          format: date
+          nullable: true
+        original_value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        supplier:
+          type: integer
+        department:
+          type: integer
+      required:
+      - code
+      - created_at
+      - current_value
+      - department
+      - id
+      - name
+      - supplier
+    ContractStatusEnum:
+      enum:
+      - DRAFT
+      - ACTIVE
+      - SUSPENDED
+      - CLOSED
+      - CANCELLED
+      type: string
+      description: |-
+        * `DRAFT` - Em preparação
+        * `ACTIVE` - Vigente
+        * `SUSPENDED` - Suspenso
+        * `CLOSED` - Encerrado
+        * `CANCELLED` - Cancelado
+    ContractUsage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        person_name:
+          type: string
+          maxLength: 150
+        team:
+          type: string
+          maxLength: 150
+        date:
+          type: string
+          format: date
+        purpose:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        contract:
+          type: integer
+        project:
+          type: integer
+          nullable: true
+        created_by:
+          type: integer
+          readOnly: true
+      required:
+      - contract
+      - created_at
+      - created_by
+      - date
+      - id
+      - person_name
+      - purpose
+    Coordination:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        department:
+          type: integer
+      required:
+      - code
+      - created_at
+      - department
+      - id
+      - name
+    CostCenter:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        department:
+          type: integer
+      required:
+      - code
+      - created_at
+      - department
+      - id
+      - name
+    Cycle:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        year:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        quarter:
+          type: integer
+          maximum: 32767
+          minimum: 0
+        opens:
+          type: string
+          format: date
+        closes:
+          type: string
+          format: date
+        active:
+          type: boolean
+      required:
+      - closes
+      - id
+      - opens
+      - quarter
+      - year
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - code
+      - created_at
+      - id
+      - name
+    Document:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        split:
+          type: array
+          items:
+            $ref: '#/components/schemas/SplitEntry'
+          writeOnly: true
+        distribution:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          readOnly: true
+        source_documents:
+          type: array
+          items:
+            type: integer
+            minimum: 1
+          writeOnly: true
+        idempotency_key:
+          type: string
+          format: uuid
+        reversed:
+          type: boolean
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FinanceStateEnum'
+          readOnly: true
+        reason:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        approved_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        request_fingerprint:
+          type: string
+          readOnly: true
+        kind:
+          $ref: '#/components/schemas/KindEnum'
+        reference:
+          type: string
+          maxLength: 120
+        date:
+          type: string
+          format: date
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        created_by:
+          type: integer
+          readOnly: true
+        approved_by:
+          type: integer
+          readOnly: true
+          nullable: true
+        contract:
+          type: integer
+        funding:
+          type: integer
+          nullable: true
+        reversal_of:
+          type: integer
+          readOnly: true
+          nullable: true
+        parent:
+          type: integer
+          nullable: true
+        sources:
+          type: array
+          items:
+            type: integer
+          readOnly: true
+      required:
+      - amount
+      - approved_at
+      - approved_by
+      - contract
+      - created_at
+      - created_by
+      - date
+      - distribution
+      - id
+      - kind
+      - reason
+      - reference
+      - request_fingerprint
+      - reversal_of
+      - reversed
+      - sources
+      - status
+    Evaluation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnswerInput'
+          writeOnly: true
+        scores:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          readOnly: true
+        positives:
+          type: string
+        negatives:
+          type: string
+        problems:
+          type: string
+        suggestions:
+          type: string
+        continuity:
+          type: string
+        submitted_at:
+          type: string
+          format: date-time
+          readOnly: true
+        invitation:
+          type: integer
+      required:
+      - answers
+      - id
+      - invitation
+      - scores
+      - submitted_at
+    FinanceStateEnum:
+      enum:
+      - DRAFT
+      - SUBMITTED
+      - APPROVED
+      - REJECTED
+      type: string
+      description: |-
+        * `DRAFT` - Rascunho
+        * `SUBMITTED` - Em aprovação
+        * `APPROVED` - Aprovado
+        * `REJECTED` - Rejeitado
+    FinancialCategoryEnum:
+      enum:
+      - CAPEX
+      - OPEX
+      type: string
+      description: |-
+        * `CAPEX` - CAPEX
+        * `OPEX` - OPEX
+    Funding:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        split:
+          type: array
+          items:
+            $ref: '#/components/schemas/SplitEntry'
+          writeOnly: true
+        distribution:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FinanceStateEnum'
+          readOnly: true
+        reason:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        approved_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        version:
+          type: integer
+          readOnly: true
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        created_by:
+          type: integer
+          readOnly: true
+        approved_by:
+          type: integer
+          readOnly: true
+          nullable: true
+        contract:
+          type: integer
+      required:
+      - amount
+      - approved_at
+      - approved_by
+      - contract
+      - created_at
+      - created_by
+      - distribution
+      - id
+      - reason
+      - status
+      - version
+    Invitation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        contract_name:
+          type: string
+          readOnly: true
+        cycle_label:
+          type: string
+          readOnly: true
+        criteria_detail:
+          type: array
+          items:
+            type: object
+            additionalProperties: {}
+          readOnly: true
+        completed:
+          type: boolean
+          readOnly: true
+        cycle:
+          type: integer
+        contract:
+          type: integer
+        user:
+          type: integer
+        criteria:
+          type: array
+          items:
+            type: integer
+      required:
+      - completed
+      - contract
+      - contract_name
+      - criteria
+      - criteria_detail
+      - cycle
+      - cycle_label
+      - id
+      - user
+    KindEnum:
+      enum:
+      - COMMITMENT
+      - MEASUREMENT
+      - INVOICE
+      - PAYMENT
+      type: string
+      description: |-
+        * `COMMITMENT` - Compromisso
+        * `MEASUREMENT` - Medição
+        * `INVOICE` - Nota fiscal
+        * `PAYMENT` - Pagamento
+    PaginatedAllocationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Allocation'
+    PaginatedAmendmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Amendment'
+    PaginatedAttachmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+    PaginatedBudgetList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Budget'
+    PaginatedBudgetRevisionList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BudgetRevision'
+    PaginatedContractList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contract'
+    PaginatedContractUsageList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContractUsage'
+    PaginatedCoordinationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Coordination'
+    PaginatedCostCenterList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostCenter'
+    PaginatedCycleList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cycle'
+    PaginatedDepartmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Department'
+    PaginatedDocumentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+    PaginatedEvaluationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Evaluation'
+    PaginatedFundingList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Funding'
+    PaginatedInvitationList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invitation'
+    PaginatedPeriodChangeList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PeriodChange'
+    PaginatedPlanList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Plan'
+    PaginatedPortfolioList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Portfolio'
+    PaginatedProjectList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+    PaginatedSupplierList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Supplier'
+    PaginatedTransferList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transfer'
+    PatchedContract:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        current_value:
+          type: string
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        manager:
+          type: string
+          maxLength: 150
+        inspector:
+          type: string
+          maxLength: 150
+        status:
+          $ref: '#/components/schemas/ContractStatusEnum'
+        start_date:
+          type: string
+          format: date
+          nullable: true
+        end_date:
+          type: string
+          format: date
+          nullable: true
+        original_value:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        supplier:
+          type: integer
+        department:
+          type: integer
+    PatchedContractUsage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        person_name:
+          type: string
+          maxLength: 150
+        team:
+          type: string
+          maxLength: 150
+        date:
+          type: string
+          format: date
+        purpose:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        contract:
+          type: integer
+        project:
+          type: integer
+          nullable: true
+        created_by:
+          type: integer
+          readOnly: true
+    PatchedCoordination:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        department:
+          type: integer
+    PatchedCostCenter:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        department:
+          type: integer
+    PatchedDepartment:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedPlan:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 180
+        description:
+          type: string
+        responsible:
+          type: string
+          maxLength: 150
+        due_date:
+          type: string
+          format: date
+        status:
+          $ref: '#/components/schemas/ActionPlanStateEnum'
+        contract:
+          type: integer
+        created_by:
+          type: integer
+          readOnly: true
+    PatchedPortfolio:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        responsible:
+          type: string
+          maxLength: 150
+        department:
+          type: integer
+    PatchedProject:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        internal_order:
+          type: string
+          maxLength: 80
+        pep_element:
+          type: string
+          maxLength: 80
+        category:
+          $ref: '#/components/schemas/ProjectCategoryEnum'
+        status:
+          $ref: '#/components/schemas/ProjectStatusEnum'
+        responsible:
+          type: string
+          maxLength: 150
+        start_date:
+          type: string
+          format: date
+          nullable: true
+        end_date:
+          type: string
+          format: date
+          nullable: true
+        physical_progress:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,2})?$
+        department:
+          type: integer
+        coordination:
+          type: integer
+          nullable: true
+    PatchedSupplier:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        tax_id:
+          type: string
+          title: CNPJ
+          pattern: ^[0-9]{14}$
+          maxLength: 14
+    PeriodChange:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FinanceStateEnum'
+          readOnly: true
+        reason:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        approved_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        year:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+        month:
+          type: integer
+          maximum: 32767
+          minimum: 0
+        closed:
+          type: boolean
+        created_by:
+          type: integer
+          readOnly: true
+        approved_by:
+          type: integer
+          readOnly: true
+          nullable: true
+      required:
+      - approved_at
+      - approved_by
+      - created_at
+      - created_by
+      - id
+      - month
+      - reason
+      - status
+      - year
+    Plan:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 180
+        description:
+          type: string
+        responsible:
+          type: string
+          maxLength: 150
+        due_date:
+          type: string
+          format: date
+        status:
+          $ref: '#/components/schemas/ActionPlanStateEnum'
+        contract:
+          type: integer
+        created_by:
+          type: integer
+          readOnly: true
+      required:
+      - contract
+      - created_by
+      - due_date
+      - id
+      - responsible
+      - title
+    Portfolio:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        responsible:
+          type: string
+          maxLength: 150
+        department:
+          type: integer
+      required:
+      - code
+      - created_at
+      - department
+      - id
+      - name
+    Project:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        internal_order:
+          type: string
+          maxLength: 80
+        pep_element:
+          type: string
+          maxLength: 80
+        category:
+          $ref: '#/components/schemas/ProjectCategoryEnum'
+        status:
+          $ref: '#/components/schemas/ProjectStatusEnum'
+        responsible:
+          type: string
+          maxLength: 150
+        start_date:
+          type: string
+          format: date
+          nullable: true
+        end_date:
+          type: string
+          format: date
+          nullable: true
+        physical_progress:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,2})?$
+        department:
+          type: integer
+        coordination:
+          type: integer
+          nullable: true
+      required:
+      - code
+      - created_at
+      - department
+      - id
+      - name
+    ProjectCategoryEnum:
+      enum:
+      - CAPEX
+      - OPEX
+      - MIXED
+      type: string
+      description: |-
+        * `CAPEX` - CAPEX
+        * `OPEX` - OPEX
+        * `MIXED` - Misto
+    ProjectStatusEnum:
+      enum:
+      - PLANNED
+      - ACTIVE
+      - PAUSED
+      - COMPLETED
+      - CANCELLED
+      type: string
+      description: |-
+        * `PLANNED` - Planejado
+        * `ACTIVE` - Em execução
+        * `PAUSED` - Pausado
+        * `COMPLETED` - Concluído
+        * `CANCELLED` - Cancelado
+    SplitEntry:
+      type: object
+      properties:
+        allocation:
+          type: integer
+          minimum: 1
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        percent:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,4})?$
+      required:
+      - allocation
+    Supplier:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        code:
+          type: string
+          title: Código
+          maxLength: 40
+        name:
+          type: string
+          title: Nome
+          maxLength: 180
+        description:
+          type: string
+          title: Descrição
+        active:
+          type: boolean
+          title: Ativo
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        tax_id:
+          type: string
+          title: CNPJ
+          pattern: ^[0-9]{14}$
+          maxLength: 14
+      required:
+      - code
+      - created_at
+      - id
+      - name
+      - tax_id
+    Transfer:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          allOf:
+          - $ref: '#/components/schemas/FinanceStateEnum'
+          readOnly: true
+        reason:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        approved_at:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        amount:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,16}(?:\.\d{0,2})?$
+        created_by:
+          type: integer
+          readOnly: true
+        approved_by:
+          type: integer
+          readOnly: true
+          nullable: true
+        source:
+          type: integer
+        target:
+          type: integer
+      required:
+      - amount
+      - approved_at
+      - approved_by
+      - created_at
+      - created_by
+      - id
+      - reason
+      - source
+      - status
+      - target
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
